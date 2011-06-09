@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the MtoN extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_nbomn_domain_model_category">Category with Sub-Categories</label>
+			<label index="tx_nbomn_domain_model_category.name">Name</label>
+			<label index="tx_nbomn_domain_model_category.category_mm">Parent Categories</label>
+			<label index="tx_nbomn_domain_model_category.subcategory">Sub Categories</label>
+		</languageKey>
+	</data>
+</T3locallang>

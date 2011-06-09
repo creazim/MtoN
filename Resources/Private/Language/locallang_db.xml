@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'nbomn'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_nbomn_domain_model_category">Category</label>
+			<label index="tx_nbomn_domain_model_category.name">Name</label>
+			<label index="tx_nbomn_domain_model_category.category_mm">Category Mm</label>
+			<label index="tx_nbomn_domain_model_category.subcategory">Subcategory</label>
+		</languageKey>
+	</data>
+</T3locallang>
