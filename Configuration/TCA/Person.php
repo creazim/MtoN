@@ -3,13 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_nbomn_domain_model_category'] = array(
-	'ctrl' => $TCA['tx_nbomn_domain_model_category']['ctrl'],
+$TCA['tx_nbomn_domain_model_person'] = array(
+	'ctrl' => $TCA['tx_nbomn_domain_model_person']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, subcategory, parentcategory',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, companies',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, subcategory, parentcategory,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, companies,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -37,8 +37,8 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				'foreign_table_where' => 'AND tx_nbomn_domain_model_category.pid=###CURRENT_PID### AND tx_nbomn_domain_model_category.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_nbomn_domain_model_person',
+				'foreign_table_where' => 'AND tx_nbomn_domain_model_person.pid=###CURRENT_PID### AND tx_nbomn_domain_model_person.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -95,20 +95,20 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 		),
 		'name' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.name',
+			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_person.name',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim,required'
 			),
 		),
-		'subcategory' => array(
+		'companies' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.subcategory',
+			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_person.companies',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				'MM' => 'tx_nbomn_category_category_mm',
+				'foreign_table' => 'tx_nbomn_domain_model_company',
+				'MM' => 'tx_nbomn_person_company_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
@@ -129,46 +129,7 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table'=> 'tx_nbomn_domain_model_category',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							),
-						'script' => 'wizard_add.php',
-					),
-				),
-			),
-		),
-		'parentcategory' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.parentcategory',
-			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				// manually changed: We need to use the same MM Table
-				'MM' => 'tx_nbomn_category_category_mm',
-				// manually changed: We also need a opposite filed for one of the two:
-				'MM_opposite_field' => 'subcategory',
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
-					'add' => Array(
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table'=> 'tx_nbomn_domain_model_category',
+							'table'=> 'tx_nbomn_domain_model_company',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 							),

@@ -38,18 +38,18 @@ class Tx_Nbomn_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $name;
 
 	/**
-	 * Parent Categories
-	 *
-	 * @var integer $categoryMm
-	 */
-	protected $categoryMm;
-
-	/**
 	 * Sub Categories
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nbomn_Domain_Model_Category> $subcategory
 	 */
 	protected $subcategory;
+
+	/**
+	 * Parent Categories
+	 *
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nbomn_Domain_Model_Category> $parentcategory
+	 */
+	protected $parentcategory;
 
 	/**
 	 * __construct
@@ -73,6 +73,7 @@ class Tx_Nbomn_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEnt
 		* You may modify the constructor of this class instead
 		*/
 		$this->subcategory = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->parentcategory = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
 	/**
@@ -92,25 +93,6 @@ class Tx_Nbomn_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function getName() {
 		return $this->name;
-	}
-
-	/**
-	 * getCategoryMm
-	 *
-	 * @return integer
-	 */
-	public function getCategoryMm() {
-		return $this->categoryMm;
-	}
-
-	/**
-	 * setCategoryMm
-	 *
-	 * @param integer $categoryMm
-	 * @return void
-	 */
-	public function setCategoryMm($categoryMm) {
-		$this->categoryMm = $categoryMm;
 	}
 
 	/**
@@ -150,6 +132,45 @@ class Tx_Nbomn_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setSubcategory(Tx_Extbase_Persistence_ObjectStorage $subcategory) {
 		$this->subcategory = $subcategory;
+	}
+
+	/**
+	 * Adds a Category
+	 *
+	 * @param Tx_Nbomn_Domain_Model_Category $parentcategory
+	 * @return void
+	 */
+	public function addParentcategory(Tx_Nbomn_Domain_Model_Category $parentcategory) {
+		$this->parentcategory->attach($parentcategory);
+	}
+
+	/**
+	 * Removes a Category
+	 *
+	 * @param Tx_Nbomn_Domain_Model_Category $parentcategoryToRemove The Category to be removed
+	 * @return void
+	 */
+	public function removeParentcategory(Tx_Nbomn_Domain_Model_Category $parentcategoryToRemove) {
+		$this->parentcategory->detach($parentcategoryToRemove);
+	}
+
+	/**
+	 * Returns the parentcategory
+	 *
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Nbomn_Domain_Model_Category> $parentcategory
+	 */
+	public function getParentcategory() {
+		return $this->parentcategory;
+	}
+
+	/**
+	 * Sets the parentcategory
+	 *
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Nbomn_Domain_Model_Category> $parentcategory
+	 * @return void
+	 */
+	public function setParentcategory($parentcategory) {
+		$this->parentcategory = $parentcategory;
 	}
 
 }

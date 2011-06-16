@@ -8,8 +8,24 @@
 		<languageKey index="default" type="array">
 			<label index="tx_nbomn_domain_model_category">Category with Sub-Categories</label>
 			<label index="tx_nbomn_domain_model_category.name">Name</label>
-			<label index="tx_nbomn_domain_model_category.category_mm">Parent Categories</label>
 			<label index="tx_nbomn_domain_model_category.subcategory">Sub Categories</label>
+			<label index="tx_nbomn_domain_model_category.parentcategory">Parent Categories</label>
+			<label index="tx_nbomn_domain_model_person">Person</label>
+			<label index="tx_nbomn_domain_model_person.name">Person Name</label>
+			<label index="tx_nbomn_domain_model_person.companies">Companies</label>
+			<label index="tx_nbomn_domain_model_company">Company</label>
+			<label index="tx_nbomn_domain_model_company.name">Company Name</label>
+			<label index="tx_nbomn_domain_model_company.persons">Persons</label>
+			<label index="tx_nbomn_domain_model_cd">CD</label>
+			<label index="tx_nbomn_domain_model_cd.name">Name</label>
+			<label index="tx_nbomn_domain_model_cd.track">Add Tracks</label>
+			<label index="tx_nbomn_domain_model_track">Track of a CD</label>
+			<label index="tx_nbomn_domain_model_track.nr">Track Number</label>
+			<label index="tx_nbomn_domain_model_track.cd">CD</label>
+			<label index="tx_nbomn_domain_model_track.song">Song</label>
+			<label index="tx_nbomn_domain_model_song">Song</label>
+			<label index="tx_nbomn_domain_model_song.name">name</label>
+			<label index="tx_nbomn_domain_model_song.cd">Add to CDs</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -71,28 +71,6 @@ class Tx_Nbomn_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	/**
 	 * @test
 	 */
-	public function getCategoryMmReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getCategoryMm()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setCategoryMmForIntegerSetsCategoryMm() { 
-		$this->fixture->setCategoryMm(12);
-
-		$this->assertSame(
-			12,
-			$this->fixture->getCategoryMm()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
 	public function getSubcategoryReturnsInitialValueForObjectStorageContainingTx_Nbomn_Domain_Model_Category() { 
 		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->assertEquals(
@@ -145,6 +123,64 @@ class Tx_Nbomn_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestC
 		$this->assertEquals(
 			$localObjectStorage,
 			$this->fixture->getSubcategory()
+		);
+	}
+	
+	/**
+	 * @test
+	 */
+	public function getParentcategoryReturnsInitialValueForObjectStorageContainingTx_Nbomn_Domain_Model_Category() { 
+		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->fixture->getParentcategory()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setParentcategoryForObjectStorageContainingTx_Nbomn_Domain_Model_CategorySetsParentcategory() { 
+		$parentcategory = new Tx_Nbomn_Domain_Model_Category();
+		$objectStorageHoldingExactlyOneParentcategory = new Tx_Extbase_Persistence_ObjectStorage();
+		$objectStorageHoldingExactlyOneParentcategory->attach($parentcategory);
+		$this->fixture->setParentcategory($objectStorageHoldingExactlyOneParentcategory);
+
+		$this->assertSame(
+			$objectStorageHoldingExactlyOneParentcategory,
+			$this->fixture->getParentcategory()
+		);
+	}
+	
+	/**
+	 * @test
+	 */
+	public function addParentcategoryToObjectStorageHoldingParentcategory() {
+		$parentcategory = new Tx_Nbomn_Domain_Model_Category();
+		$objectStorageHoldingExactlyOneParentcategory = new Tx_Extbase_Persistence_ObjectStorage();
+		$objectStorageHoldingExactlyOneParentcategory->attach($parentcategory);
+		$this->fixture->addParentcategory($parentcategory);
+
+		$this->assertEquals(
+			$objectStorageHoldingExactlyOneParentcategory,
+			$this->fixture->getParentcategory()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeParentcategoryFromObjectStorageHoldingParentcategory() {
+		$parentcategory = new Tx_Nbomn_Domain_Model_Category();
+		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+		$localObjectStorage->attach($parentcategory);
+		$localObjectStorage->detach($parentcategory);
+		$this->fixture->addParentcategory($parentcategory);
+		$this->fixture->removeParentcategory($parentcategory);
+
+		$this->assertEquals(
+			$localObjectStorage,
+			$this->fixture->getParentcategory()
 		);
 	}
 	

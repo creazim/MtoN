@@ -3,13 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_nbomn_domain_model_category'] = array(
-	'ctrl' => $TCA['tx_nbomn_domain_model_category']['ctrl'],
+$TCA['tx_nbomn_domain_model_track'] = array(
+	'ctrl' => $TCA['tx_nbomn_domain_model_track']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, subcategory, parentcategory',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, nr, cd, song',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, subcategory, parentcategory,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, nr, cd, song,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -37,8 +37,8 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				'foreign_table_where' => 'AND tx_nbomn_domain_model_category.pid=###CURRENT_PID### AND tx_nbomn_domain_model_category.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_nbomn_domain_model_track',
+				'foreign_table_where' => 'AND tx_nbomn_domain_model_track.pid=###CURRENT_PID### AND tx_nbomn_domain_model_track.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -93,29 +93,27 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 				),
 			),
 		),
-		'name' => array(
+		'nr' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.name',
+			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_track.nr',
 			'config' => array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim,required'
+				'size' => 4,
+				'eval' => 'int,required'
 			),
 		),
-		'subcategory' => array(
+		'cd' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.subcategory',
+			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_track.cd',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				'MM' => 'tx_nbomn_category_category_mm',
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
+				'foreign_table' => 'tx_nbomn_domain_model_cd',
+				// manually changed: In this relation table, we need a relation, so minitems = 1
+				'minitems' => 1,
+				'maxitems' => 1,
 				'wizards' => array(
 					'_PADDING' => 1,
-					'_VERTICAL' => 1,
+					'_VERTICAL' => 0,
 					'edit' => array(
 						'type' => 'popup',
 						'title' => 'Edit',
@@ -125,11 +123,12 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
 						),
 					'add' => Array(
-						'type' => 'script',
+						// manually changed: Make it a PopUp (Typo3 Bug: invalid Ajax UID)
+						'type' => 'popup',
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table'=> 'tx_nbomn_domain_model_category',
+							'table'=> 'tx_nbomn_domain_model_cd',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 							),
@@ -138,23 +137,18 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 				),
 			),
 		),
-		'parentcategory' => array(
+		'song' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_category.parentcategory',
+			'label' => 'LLL:EXT:nbomn/Resources/Private/Language/locallang_db.xml:tx_nbomn_domain_model_track.song',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_nbomn_domain_model_category',
-				// manually changed: We need to use the same MM Table
-				'MM' => 'tx_nbomn_category_category_mm',
-				// manually changed: We also need a opposite filed for one of the two:
-				'MM_opposite_field' => 'subcategory',
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
+				'foreign_table' => 'tx_nbomn_domain_model_song',
+				// manually changed: In this relation table, we need a relation, so minitems = 1
+				'minitems' => 1,
+				'maxitems' => 1,
 				'wizards' => array(
 					'_PADDING' => 1,
-					'_VERTICAL' => 1,
+					'_VERTICAL' => 0,
 					'edit' => array(
 						'type' => 'popup',
 						'title' => 'Edit',
@@ -164,11 +158,12 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
 						),
 					'add' => Array(
-						'type' => 'script',
+						// manually changed: Make it a PopUp (Typo3 Bug: invalid Ajax UID)
+						'type' => 'popup',
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table'=> 'tx_nbomn_domain_model_category',
+							'table'=> 'tx_nbomn_domain_model_song',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 							),
@@ -177,6 +172,17 @@ $TCA['tx_nbomn_domain_model_category'] = array(
 				),
 			),
 		),
+		// manually changed: we don't need this:
+		/*'cd' => array(
+			'config' => array(
+				'type' => 'passthrough',
+			),
+		),
+		'song' => array(
+			'config' => array(
+				'type' => 'passthrough',
+			),
+		),*/
 	),
 );
 ?>

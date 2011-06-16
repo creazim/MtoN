@@ -1,0 +1,1 @@
+Search for "manually changed" to find all instances where you need to changes something from the Kickstarter Code
